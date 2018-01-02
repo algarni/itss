@@ -7,12 +7,13 @@
 <body>
 <h1>Welcome to Checklist App!</h1>
 <form action="" method="post">
-    <select>
+    {% csrf_token %}
+    <select name="list-templates">
         {% for temp in list_templates %}
-            <option value="{{ temp.id }}" >{{ temp.name }}</option>
+            <option value="{{ temp.id }}">{{ temp.name }}</option>
         {% endfor %}
     </select>
-    <input type="submit" value="OK">
+    <input type="submit" value="Create">
 </form>
 </body>
 </html>

@@ -10,7 +10,7 @@ class ListTemplate(models.Model):
 
 class ListItemTemplate(models.Model):
     name = models.CharField(max_length=250)
-    itemIsChecked = models.BooleanField()
+    itemIsChecked = models.BooleanField(default=False)
     list = models.ForeignKey('ListTemplate', on_delete=models.CASCADE)
 
 
@@ -20,5 +20,5 @@ class List(models.Model):
 
 class Item(models.Model):
     name = models.CharField(max_length=250)
-    itemIsChecked = models.BooleanField()
+    itemIsChecked = models.BooleanField(default=False)
     list = models.ForeignKey('List', on_delete=models.CASCADE)
