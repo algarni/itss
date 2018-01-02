@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checklist HomePage</title>
+</head>
+<body>
+<h1>Welcome to Checklist App!</h1>
+<form action="" method="post">
+    <select>
+        {% for temp in list_templates %}
+            <option value="{{ temp.id }}" >{{ temp.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="OK">
+</form>
+</body>
+</html>
