@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home),
-    path('create', views.create)
+    path('<int:pk>/', views.checklist_detail)
 ]

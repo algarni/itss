@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Checklist HomePage</title>
-</head>
-<body>
-<h1>Welcome to Checklist App!</h1>
-<form action="" method="post">
-    {% csrf_token %}
-    <select name="list-templates">
-        {% for temp in list_templates %}
-            <option value="{{ temp.id }}">{{ temp.name }}</option>
+{% extends 'checklist\layout.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+    <h1>My Checklist</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Checklist Title:</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="list-templates">Select a checklist type:</label>
+            <select name="list-templates" class="form-control">
+                {% for temp in list_templates %}
+                    <option value="{{ temp.id }}">{{ temp.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="Create" class="btn btn-primary">
+    </form>
+    <hr>
+    <h2>ToDo</h2>
+    <ul class="list-group">
+        {% for list in checklists %}
+            <li class="list-group-item">{{ list.name }}</li>
         {% endfor %}
-    </select>
-    <input type="submit" value="Create">
-</form>
-</body>
-</html>
+    </ul>
+    <hr>
+    <h2>Done</h2>
+
+{% endblock %}
