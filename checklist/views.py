@@ -35,4 +35,23 @@ def checklist_detail(request, pk):
     checklist = List.objects.get(pk=pk)
     items = Item.objects.filter(list__id=pk)
     return render(request, 'checklist/checklist_detail.html',
-                  {'items': items, 'checklist':checklist})
+                  {'items': items, 'checklist': checklist})
+
+
+def checklist_delete(request, pk):
+    checklist = List.objects.get(pk=pk)
+    checklist.delete()
+    return redirect(home)
+
+
+def task_complete(request, checklist_pk, item_pk):
+    task = Item.objects.get(pk=item_pk)
+    task.itemIsChecked = True
+    task.save()
+    return redirect(checklist_detail, pk=checklist_pk)
+
+
+def task_delete(request, checklist_pk, item_pk):
+    task = Item.objects.get(pk=item_pk)
+    task.delete()
+    return redirect(checklist_detail, pk=checklist_pk)

@@ -1,16 +1,16 @@
 {% extends 'checklist\layout.html' %}
-{% block title %}{% endblock %}
+{% block title %}Checklist App Home Page{% endblock %}
 {% block content %}
     <h1>My Checklist</h1>
-    <form action="" method="post">
+    <form action="#" method="post">
         {% csrf_token %}
         <div class="form-group">
             <label for="title">Checklist Title:</label>
-            <input type="text" name="title" class="form-control">
+            <input type="text" id="title" class="form-control">
         </div>
         <div class="form-group">
             <label for="list-templates">Select a checklist type:</label>
-            <select name="list-templates" class="form-control">
+            <select id="list-templates" class="form-control">
                 {% for temp in list_templates %}
                     <option value="{{ temp.id }}">{{ temp.name }}</option>
                 {% endfor %}
@@ -22,7 +22,15 @@
     <h2>ToDo</h2>
     <ul class="list-group">
         {% for list in checklists %}
-            <li class="list-group-item">{{ list.name }}</li>
+            <li style="font-size: 22px;" class="list-group-item clearfix justify-content-between align-items-center">
+                {{ list.name }}
+                {#                <span class="btn btn-xs btn-danger pull-right">Delete</span>#}
+                {#                <span class="btn btn-xs btn-primary pull-right">Edit</span>#}
+                <div class="btn-group  pull-right" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary" href="{% url 'checklist_detail' pk=list.id %}">View</a>
+                    <a class="btn btn-danger" href="{% url 'checklist_delete' pk=list.id %}">Delete</a>
+                </div>
+            </li>
         {% endfor %}
     </ul>
     <hr>
